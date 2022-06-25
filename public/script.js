@@ -1,4 +1,4 @@
-var socket = io("http://localhost:3000", { transports: ["websocket"] });
+var socket = io("http://localhost:3001", { transports: ["websocket"] });
 
 var myPeer = new Peer(undefined, {
   host: "/",
