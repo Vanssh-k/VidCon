@@ -1,4 +1,4 @@
-var socket = io("http://process.env.PORT");
+var socket = io("http://" + port);
 
 var myPeer = new Peer(undefined, {
   host: "/",
@@ -23,13 +23,13 @@ navigator.mediaDevices
   })
   .then((stream) => {
     addVideoStream(my_video, stream);
-    myPeer.on('call', call => {
-      call.answer(stream)
-      const video = document.createElement('video')
-      call.on('stream', userVideoStream => {
-        addVideoStream(video, userVideoStream)
-      })
-    })
+    myPeer.on("call", (call) => {
+      call.answer(stream);
+      const video = document.createElement("video");
+      call.on("stream", (userVideoStream) => {
+        addVideoStream(video, userVideoStream);
+      });
+    });
 
     socket.on("user-joined", (userId) => {
       connectToNewUser(userId, stream);
