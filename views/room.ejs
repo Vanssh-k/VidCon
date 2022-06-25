@@ -7,16 +7,16 @@
     <title>Chat App</title>
     <script>
       const RoomId = "<%= roomID %>";
-      const port = "%= port %>";
-      const url = "http://"+port+"/socket.io/socket.io.js";
-      console.log(port + " " + url);
+      // const port = "%= port %>";
+      // const url = "http://"+port+"/socket.io/socket.io.js";
+      // console.log(port + " " + url);
     </script>
     <script
       defer
       src="https://unpkg.com/peerjs@1.4.5/dist/peerjs.min.js"
     ></script>
     <!-- <script defer src="http://localhost:3000/socket.io/socket.io.js"></script> -->
-    <script defer src=`/$url`></script>
+    <script defer src="https://obscure-dawn-39560.herokuapp.com/socket.io/socket.io.js"></script>
     <script defer src="script.js"></script>
     <style>
       #video-grid {
