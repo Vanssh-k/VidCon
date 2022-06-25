@@ -37,6 +37,6 @@ const userLoginRoute = require("./const_material/routes/userLoginRoute");
 app.use(userLoginRoute);
 
 // Listen Server
-server.listen("3000", () => {
+server.listen(process.env.PORT || "3000", () => {
   console.log("server started at port 3000");
 });
