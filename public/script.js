@@ -1,9 +1,8 @@
 var socket = io("https://obscure-dawn-39560.herokuapp.com");
 
-const myPeer = new Peer('someid', {
-  secure: true,
-  host: "https://obscure-dawn-39560.herokuapp.com",
-  port: "443",
+var myPeer = new Peer(undefined, {
+  host: "/",
+  port: "3001",
 });
 
 var name = prompt("Enter your name");
