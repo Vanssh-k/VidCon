@@ -1,11 +1,11 @@
 // var socket = io("https://obscure-dawn-39560.herokuapp.com");
 var socket = io();
-var el;
+// var el;
 
-socket.on("time", function (timeString) {
-  el = document.getElementById("server-time");
-  el.innerHTML = "Server time: " + timeString;
-});
+// socket.on("time", function (timeString) {
+//   el = document.getElementById("server-time");
+//   el.innerHTML = "Server time: " + timeString;
+// });
 
 var myPeer = new Peer(undefined, {
   secure: true,
