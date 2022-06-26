@@ -1,4 +1,4 @@
-var socket = io("https://obscure-dawn-39560.herokuapp.com", {transport : "websocket"});
+var socket = io("https://obscure-dawn-39560.herokuapp.com");
 
 var myPeer = new Peer(undefined, {
   host: "/",
