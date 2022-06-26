@@ -10,7 +10,6 @@ const io = require("socket.io")(server);
 
 const chats = require("./ChatApp/socketConnections.js");
 chats(io);
-io.set('transports', ['websocket']);
 const Mongoose = require("./const_material/models/mongoose");
 
 app.set("view engine", "ejs");
