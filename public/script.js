@@ -46,6 +46,7 @@ navigator.mediaDevices
 
 socket.on("user-disconnected", (userId) => {
   if (peers[userId]) peers[userId].close();
+  connectToNewUser(userId,stream);
 });
 
 function connectToNewUser(userId, stream) {
