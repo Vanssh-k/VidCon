@@ -1,16 +1,16 @@
 const express = require("express");
 const http = require("http");
 const ejs = require("ejs");
-// const cors = require("cors");
 
 const app = express();
 
 const server = http.createServer(app);
 const io = require("socket.io")(server);
 
+const Mongoose = require("./const_material/models/mongoose");
+
 const chats = require("./ChatApp/socketConnections.js");
 chats(io);
-const Mongoose = require("./const_material/models/mongoose");
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));

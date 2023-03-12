@@ -1,11 +1,5 @@
-// var socket = io("https://obscure-dawn-39560.herokuapp.com");
-var socket = io();
-// var el;
 
-// socket.on("time", function (timeString) {
-//   el = document.getElementById("server-time");
-//   el.innerHTML = "Server time: " + timeString;
-// });
+var socket = io();
 
 var myPeer = new Peer(undefined, {
   secure: true,
@@ -13,12 +7,12 @@ var myPeer = new Peer(undefined, {
   port: "443",
 });
 
-var name = prompt("Enter your name");
+// var name = prompt("Enter your name");
 
 const form = document.getElementById("msg-form");
 const input = document.getElementById("msg-input");
 
-const videoGrid = document.getElementById("video-grid");
+const videoGrid = document.getElementById("videoGrid");
 const my_video = document.createElement("video");
 my_video.muted = true;
 
@@ -30,6 +24,7 @@ navigator.mediaDevices
     video: true,
   })
   .then((stream) => {
+    window.localStream = stream;
     addVideoStream(my_video, stream);
     myPeer.on("call", (call) => {
       call.answer(stream);
@@ -40,12 +35,20 @@ navigator.mediaDevices
     });
 
     socket.on("user-joined", (userId) => {
+      console.log("new user joined!");
       connectToNewUser(userId, stream);
     });
   });
 
-socket.on("user-disconnected", (userId) => {
-  if (peers[userId]) peers[userId].close();
+socket.on("user-disconnected", (data) => {
+
+  // const parsedData = Flatted.parse(data);
+
+  // console.log(parsedData);
+ 
+  // parsedData.close();
+  // if (peers[data.userId]) peers[data.userId].close();
+  // console.log( peers[data.userId]);
 });
 
 function connectToNewUser(userId, stream) {
@@ -59,6 +62,18 @@ function connectToNewUser(userId, stream) {
   });
 
   peers[userId] = call;
+
+  // call.close();
+  console.log(call, userId);
+  // stringifiedCall = Flatted.stringify(call);
+  // parsedCall = Flatted.parse(stringifiedCall);
+  // // console.log(parsedCall);
+
+  // parsedCall.close();
+  
+  // socket.emit("call", stringifiedCall, userId);
+
+  socket.emit("call", );
 }
 
 function addVideoStream(video, stream) {
@@ -73,17 +88,24 @@ myPeer.on("open", (id) => {
   socket.emit("join-room", RoomId, id);
 });
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault;
-  var message = input.value;
-  input.value = "";
-  socket.emit("send", message);
-});
-
 socket.on("user-joined", (data) => {
   console.log("Hurrey!! " + data + " has joined the room!");
 });
 
-socket.on("message", (message) => {
-  console.log(message);
-});
+
+muteBtn = document.getElementById("mute-btn");
+muteBtn.addEventListener("click", () => {
+    localStream.getAudioTracks()[0].stop();
+    localStream.getAudioTracks()[0].enabled = !localStream.getAudioTracks()[0].enabled;
+
+    muteBtn.classList.toggle("Active");
+    
+})
+
+videoOff = document.getElementById("videoOff-btn");
+videoOff.addEventListener("click", () => {
+    localStream.getVideoTracks()[0].enabled = !localStream.getVideoTracks()[0].enabled
+
+    videoOff.classList.toggle("Active");
+
+})
